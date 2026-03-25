@@ -150,13 +150,16 @@
     }
   }
 }
-    /* 手机端将侧边栏移至内容区上方 */
+
+/* 手机端将侧边栏（分类/标签）移至文章列表上方 */
 @media (max-width: 768px) {
-  .lg\:grid-cols-\[1fr_280px\] {
+  /* 匹配 Fuwari 默认的布局容器类（含 'grid-cols' 的类） */
+  [class*="grid-cols"] {
     display: flex !important;
     flex-direction: column !important;
   }
-  .lg\:grid-cols-\[1fr_280px\] > :last-child {
+  /* 将侧边栏（通常为第二个子元素）移到前面 */
+  [class*="grid-cols"] > :last-child {
     order: -1;
     margin-bottom: 2rem;
   }
