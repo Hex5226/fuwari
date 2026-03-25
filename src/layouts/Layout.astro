@@ -78,19 +78,6 @@ const bannerOffset =
 >
 	<head>
 <style is:global>
-/* 手机端将侧边栏（分类/标签）移至文章列表上方，但不动页脚 */
-@media (max-width: 768px) {
-  /* 只影响 <main> 内部包含 grid-cols 的容器 */
-  main [class*="grid-cols"] {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  main [class*="grid-cols"] > :last-child {
-    order: -1;
-    margin-bottom: 2rem;
-  }
-}
-</style>
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
