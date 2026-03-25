@@ -78,6 +78,23 @@ const bannerOffset =
 >
 	<head>
 <style is:global>
+@media (max-width: 768px) {
+  /* 让侧边栏内部使用 flex 列排列 */
+  #sidebar > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 个人信息卡片（头像、简介、社交链接）放到后面 */
+  #sidebar > div > div:first-child {
+    order: 2;
+  }
+
+  /* 分类/标签区域放到前面 */
+  #sidebar > div > #sidebar-sticky {
+    order: 1;
+  }
+}
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
