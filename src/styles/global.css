@@ -1,0 +1,17 @@
+@media (max-width: 768px) {
+  /* 让侧边栏使用 flex 列布局 */
+  #sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* 个人信息卡片容器放到后面 */
+  #sidebar > div:first-child {
+    order: 2 !important;
+  }
+
+  /* 分类/标签区域放到前面 */
+  #sidebar-sticky {
+    order: 1 !important;
+  }
+}
