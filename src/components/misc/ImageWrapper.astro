@@ -36,12 +36,14 @@ if (isLocal) {
 		.normalize(path.join("../../", basePath, src))
 		.replace(/\\/g, "/");
 	const file = files[normalizedPath];
-	if (!file) {
-		console.error(
-			`\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`,
-		);
-	}
-	img = await file();
+		if (!file) {
+  		console.warn(
+    	`\n[WARN] Image file not found: ${normalizedPath.replace("../../", "src/")}`,
+  		);
+  		// 不执行 await，img 保持 undefined，后续条件判断会跳过渲染
+		} else {
+  		img = await file();
+}
 }
 
 const imageClass = "w-full h-full object-cover";
