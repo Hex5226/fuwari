@@ -189,6 +189,272 @@ const bannerOffset =
 		@apply opacity-0 -translate-y-16
 	}
 }
+
+:root {
+  --primary: #c97e5a !important;
+}
+
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* 侧边栏内所有卡片（分类、标签） */
+#sidebar-sticky .card-base {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 导航栏卡片 */
+#navbar .card-base {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 文章卡片（如果有） */
+.post-card, .article-card {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 头像框（特殊处理） */
+#sidebar > .flex.flex-col > .card-base:first-child {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+#sidebar > .flex.flex-col > .card-base:first-child,
+#sidebar > .flex.flex-col > .card-base:first-child * {
+  color: #ffffff !important;
+}
+#sidebar > .flex.flex-col > .card-base:first-child a {
+  color: var(--primary) !important;
+}
+
+/* 分割线 */
+hr, .border-t, .border-b, .border-dashed {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn-plain,
+.btn-regular {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+.btn-plain:hover,
+.btn-regular:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 1. 修复“标签”标题文字颜色（与“分类”保持一致） */
+#sidebar-sticky widget-layout[data-id="tags"] .font-bold {
+  color: #ffffff !important;
+}
+
+/* 2. 导航栏文字“主页”“归档”改为白色 */
+#navbar .btn-plain {
+  color: #ffffff !important;
+}
+/* 导航栏按钮（搜索、调色板、主题切换、菜单）内的图标改为白色 */
+#navbar button svg,
+#navbar .btn-plain svg {
+  color: #ffffff !important;
+}
+/* 导航栏右侧的显示设置按钮（调色板图标） */
+#display-settings-switch svg {
+  color: #ffffff !important;
+}
+/* 导航栏的主题切换按钮内的图标（三个不同状态） */
+#scheme-switch svg {
+  color: #ffffff !important;
+}
+
+/* 3. 头像框内 Steam/GitHub 按钮背景半透明（覆盖原 oklch 背景） */
+#sidebar .btn-regular {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+#sidebar .btn-regular:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 搜索框（桌面端） */
+#search-bar {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 0.5rem;
+}
+#search-bar input {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+#search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+#search-bar svg {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 搜索弹出面板 */
+#search-panel {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+#search-bar-inside {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 0.5rem;
+}
+#search-bar-inside input {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+#search-bar-inside input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+#search-bar-inside svg {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 搜索面板整体背景优化 */
+#search-panel {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 搜索结果文字颜色 */
+#search-panel .pagefind-ui__result,
+#search-panel .pagefind-ui__result * {
+  color: #ffffff !important;
+}
+
+/* 搜索结果链接颜色（保持主题色） */
+#search-panel .pagefind-ui__result a {
+  color: var(--primary) !important;
+}
+
+/* 搜索结果高亮部分（mark） */
+#search-panel .pagefind-ui__result mark {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* 鼠标悬停时搜索结果项背景 */
+#search-panel .pagefind-ui__result:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 搜索面板内的结果链接 */
+#search-panel a {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.75rem; /* 与 rounded-xl 匹配 */
+  margin-top: 0.5rem;
+  display: block;
+}
+
+#search-panel a:first-of-type {
+  margin-top: 0.5rem;
+}
+#search-panel a:not(:first-of-type) {
+  margin-top: 0.5rem;
+}
+
+/* 结果内所有文字默认白色 */
+#search-panel a,
+#search-panel a * {
+  color: #ffffff !important;
+}
+
+/* 标题保持主题色（可选） */
+#search-panel a .font-bold {
+  color: var(--primary) !important;
+}
+
+/* 悬停时背景加深，文字变为主题色（标题已主题色不变） */
+#search-panel a:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+#search-panel a:hover * {
+  color: #ffffff !important;
+}
+#search-panel a:hover .font-bold {
+  color: var(--primary) !important;
+}
+
+/* 高亮 mark 样式 */
+#search-panel mark {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  padding: 0 0.2rem;
+  border-radius: 0.25rem;
+}
+
+/* ========== 分页导航样式（上一页/下一页按钮 & 页码数字） ========== */
+/* 1. 上一页/下一页按钮背景半透明毛玻璃 */
+.flex.flex-row.gap-3.justify-center a.btn-card {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.5rem !important;
+  color: #ffffff !important;
+}
+/* 按钮内的箭头图标颜色改为白色（覆盖主题色） */
+.flex.flex-row.gap-3.justify-center a.btn-card svg {
+  color: #ffffff !important;
+}
+
+/* 悬停效果：背景变亮，箭头变主题色 */
+.flex.flex-row.gap-3.justify-center a.btn-card:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+.flex.flex-row.gap-3.justify-center a.btn-card:hover svg {
+  color: var(--primary) !important;
+}
+
+/* 禁用状态（如第一页时上一页不可点） */
+.flex.flex-row.gap-3.justify-center a.btn-card.disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+.flex.flex-row.gap-3.justify-center a.btn-card.disabled:hover {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.flex.flex-row.gap-3.justify-center a.btn-card.disabled:hover svg {
+  color: #ffffff !important;
+}
+
+/* 2. 页码区域整体背景半透明毛玻璃 */
+.flex.flex-row.gap-3.justify-center > div:has(.bg-\[var\(--card-bg\)\]) {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden;
+}
+
+/* 页码数字文字颜色改为白色（非当前页） */
+.flex.flex-row.gap-3.justify-center .text-neutral-700.dark\:text-neutral-300 {
+  color: #ffffff !important;
+}
+
+/* 当前页码数字（背景为主题色，文字白色）保持不变，但确保背景不透明 */
+.flex.flex-row.gap-3.justify-center .bg-\[var\(--primary\)\] {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+}
+
+
 @media (min-width: 768px) {
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/bg.jpg');

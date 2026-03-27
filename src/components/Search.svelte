@@ -13,23 +13,6 @@ let isSearching = false;
 let pagefindLoaded = false;
 let initialized = false;
 
-const fakeResult: SearchResult[] = [
-	{
-		url: url("/"),
-		meta: {
-			title: "This Is a Fake Search Result",
-		},
-		excerpt:
-			"Because the search cannot work in the <mark>dev</mark> environment.",
-	},
-	{
-		url: url("/"),
-		meta: {
-			title: "If You Want to Test the Search",
-		},
-		excerpt: "Try running <mark>npm build && npm preview</mark> instead.",
-	},
-];
 
 const togglePanel = () => {
 	const panel = document.getElementById("search-panel");
@@ -66,14 +49,14 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 		if (import.meta.env.PROD && pagefindLoaded && window.pagefind) {
 			const response = await window.pagefind.search(keyword);
 			searchResults = await Promise.all(
-				response.results.map((item) => item.data()),
-			);
-		} else if (import.meta.env.DEV) {
-			searchResults = fakeResult;
+			response.results.map((item) => item.data()),
+		);
 		} else {
-			searchResults = [];
-			console.error("Pagefind is not available in production environment.");
-		}
+		searchResults = [];
+	if (!import.meta.env.DEV) {
+		console.error("Pagefind is not available in production environment.");
+	}
+}
 
 		result = searchResults;
 		setPanelVisibility(result.length > 0, isDesktop);
