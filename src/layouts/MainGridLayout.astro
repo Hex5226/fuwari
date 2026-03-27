@@ -122,4 +122,17 @@ const mainPanelTop = siteConfig.banner.enable
         {!siteConfig.toc.enable && <div id="toc"></div>}
     </div>
 </div>
+<style is:global>
+@media (max-width: 1023px) {
+  #main-grid {
+    grid-template-rows: auto 1fr auto !important;
+  }
+  #main-grid > :first-child {
+    grid-row: 1 / 2 !important;
+  }
+  #swup-container {
+    grid-row: 2 / 3 !important;
+  }
+}
+</style>
 </Layout>
