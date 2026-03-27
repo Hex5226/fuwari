@@ -454,6 +454,21 @@ hr, .border-t, .border-b, .border-dashed {
   color: #ffffff !important;
 }
 
+/* 将特定分隔元素背景设为透明 */
+.transition.flex.flex-col.rounded-\[var\(--radius-large\)\].bg-\[var\(--card-bg\)\].py-1.md\:py-0.md\:bg-transparent.md\:gap-4.mb-4 {
+  background-color: transparent !important;
+}
+
+html {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+body {
+  background-color: transparent !important;
+}
 
 @media (min-width: 768px) {
 body {
