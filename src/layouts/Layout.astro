@@ -562,20 +562,5 @@ if (window.swup) {
 	document.addEventListener("swup:enable", setup)
 }
 
-// 移动端重新排列侧边栏顺序
-function reorderSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const profileCard = sidebar?.querySelector('div.flex.flex-col.w-full.gap-4.mb-4');
-  const sidebarSticky = document.getElementById('sidebar-sticky');
-  if (sidebar && profileCard && sidebarSticky && window.innerWidth <= 768) {
-    // 如果当前顺序是 profileCard 在上，sidebarSticky 在下，则交换
-    if (sidebar.firstChild === profileCard) {
-      sidebar.insertBefore(sidebarSticky, profileCard);
-    }
-  }
-}
 
-// 在页面加载和窗口大小改变时执行
-window.addEventListener('DOMContentLoaded', reorderSidebar);
-window.addEventListener('resize', reorderSidebar);
 </script>
