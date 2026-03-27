@@ -137,7 +137,7 @@ const bannerOffset =
 	</script>
 
 	<!-- 这里添加你之前引入的 global.css -->
-	<link rel="stylesheet" href="/src/styles/global.css" />
+	<link rel="stylesheet" href="/css/global.css" />
 
 	<style define:vars={{
 		configHue,
@@ -191,18 +191,6 @@ const bannerOffset =
 	.navbar-hidden {
 		@apply opacity-0 -translate-y-16
 	}
-}
-@media (max-width: 768px) {
-  #sidebar {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  #sidebar > div:first-child {
-    order: 2 !important;
-  }
-  #sidebar-sticky {
-    order: 1 !important;
-  }
 }
 </style>
 
