@@ -150,21 +150,31 @@ const bannerOffset =
 	>
 <script>
 (function() {
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes bounceShake {
-      0% { transform: scale(0.8) translateY(0); opacity: 0; }
-      30% { transform: scale(1.2) translateY(-10px); opacity: 1; }
-      60% { transform: scale(1) translateY(5px); }
-      80% { transform: translateY(-3px); }
-      100% { transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-  `;
-  document.head.appendChild(style);
+  // 检查是否已经显示过启动动效（当前会话中）
+  if (sessionStorage.getItem('splashShown')) {
+    return;
+  }
+  sessionStorage.setItem('splashShown', 'true');
+
+  // 添加动画关键帧（避免重复添加）
+  if (!document.getElementById('splash-anim-styles')) {
+    const style = document.createElement('style');
+    style.id = 'splash-anim-styles';
+    style.textContent = `
+      @keyframes bounceShake {
+        0% { transform: scale(0.8) translateY(0); opacity: 0; }
+        30% { transform: scale(1.2) translateY(-10px); opacity: 1; }
+        60% { transform: scale(1) translateY(5px); }
+        80% { transform: translateY(-3px); }
+        100% { transform: translateY(0); }
+      }
+      @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
 
   const splash = document.createElement('div');
   splash.id = 'splash-screen';
@@ -184,7 +194,6 @@ const bannerOffset =
     transition: opacity 1.2s ease-out;
     pointer-events: none;
   `;
-
   const text = document.createElement('span');
   text.style.cssText = `
     font-size: 6rem;
@@ -197,7 +206,6 @@ const bannerOffset =
     margin-bottom: 2rem;
   `;
   text.textContent = '-_Hex';
-
   const subText = document.createElement('span');
   subText.style.cssText = `
     font-size: 2rem;
@@ -210,21 +218,16 @@ const bannerOffset =
     animation: fadeInUp 0.6s ease-out 0.3s forwards;
   `;
   subText.textContent = '技术小站';
-
   splash.appendChild(text);
   splash.appendChild(subText);
   document.body.appendChild(splash);
 
   window.addEventListener('load', () => {
-    const splash = document.getElementById('splash-screen');
-    if (splash) {
-      // 等待 1.5 秒后开始渐隐（确保动画全部完成）
-      setTimeout(() => {
-        splash.style.opacity = '0';
-        splash.style.transition = 'opacity 0.8s ease-out';
-        splash.addEventListener('transitionend', () => splash.remove(), { once: true });
-      }, 1500);
-    }
+    setTimeout(() => {
+      splash.style.opacity = '0';
+      splash.style.transition = 'opacity 0.8s ease-out';
+      splash.addEventListener('transitionend', () => splash.remove(), { once: true });
+    }, 1500);
   });
 })();
 </script>
