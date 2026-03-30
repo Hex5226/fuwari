@@ -814,7 +814,7 @@ pre {
   background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
-/* 强力毛玻璃效果 - 更通透、更高模糊、带微光边框和阴影 */
+/* 强化磨砂玻璃质感：深色半透明 + 高模糊 + 微光边框 + 阴影 */
 .card-base,
 .post-card,
 .article-card,
@@ -825,10 +825,10 @@ table-of-contents,
 #sidebar-sticky .card-base,
 #navbar .card-base,
 #sidebar > .flex.flex-col > .card-base:first-child {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;   /* 深色半透明，保持文字清晰 */
+  backdrop-filter: blur(16px) !important;           /* 增加模糊度，磨砂感更强 */
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
 }
 
 @media (min-width: 768px) {
