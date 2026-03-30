@@ -814,7 +814,7 @@ pre {
   background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
-/* 强化磨砂玻璃质感：深色半透明 + 高模糊 + 微光边框 + 阴影 */
+/* 磨砂玻璃效果（适中强度） */
 .card-base,
 .post-card,
 .article-card,
@@ -825,10 +825,10 @@ table-of-contents,
 #sidebar-sticky .card-base,
 #navbar .card-base,
 #sidebar > .flex.flex-col > .card-base:first-child {
-  background-color: rgba(0, 0, 0, 0.7) !important;   /* 深色半透明，保持文字清晰 */
-  backdrop-filter: blur(16px) !important;           /* 增加模糊度，磨砂感更强 */
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;   /* 半透明，不遮太深 */
+  backdrop-filter: blur(8px) !important;            /* 模糊适中 */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
 @media (min-width: 768px) {
