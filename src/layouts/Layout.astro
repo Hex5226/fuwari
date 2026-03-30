@@ -814,6 +814,21 @@ pre {
   background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
+/* 加强毛玻璃效果（覆盖原有卡片样式） */
+#sidebar-sticky .card-base,
+#navbar .card-base,
+.post-card,
+.article-card,
+#sidebar > .flex.flex-col > .card-base:first-child,
+#sidebar-sticky .cardbase,
+table-of-contents,
+main .card-base,
+main .btn-card {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
 @media (min-width: 768px) {
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/bg.jpg');
