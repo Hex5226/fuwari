@@ -236,6 +236,17 @@ const bannerOffset =
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
+<script>
+  // 为所有图片添加懒加载属性（兼容性良好）
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+      if (!img.hasAttribute('loading')) {
+        img.setAttribute('loading', 'lazy');
+      }
+    });
+  });
+</script>
 	</body>
 </html>
 
@@ -812,6 +823,57 @@ pre {
 /* 可选：悬停时背景加深一点，增强交互感 */
 .card-base .meta-icon:hover {
   background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 磨砂玻璃效果 + 微光边框 */
+.card-base,
+.post-card,
+.article-card,
+.widget-layout,
+main .card-base,
+main .btn-card,
+table-of-contents,
+#sidebar-sticky .card-base,
+#navbar .card-base,
+#sidebar > .flex.flex-col > .card-base:first-child {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 12px rgba(255, 200, 120, 0.5) !important;
+}
+
+/* 按钮悬停时渐变背景（与主题色呼应） */
+.btn-plain:hover,
+.btn-regular:hover,
+button:hover:not(.btn-plain):not(.btn-regular) {
+  background-image: linear-gradient(135deg, rgba(201,126,90,0.2), rgba(255,160,100,0.2)) !important;
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 文章列表卡片悬停效果（只对列表页） */
+:not(#post-container) .card-base:hover,
+:not(#post-container) .post-card:hover,
+.widget-layout:hover,
+table-of-contents:hover {
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-2px);
+  transition: all 0.25s ease;
+}
+/* 主要按钮悬停微光（如“阅读更多”按钮） */
+.btn-card:hover {
+  box-shadow: 0 0 8px rgba(201, 126, 90, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* 彻底禁用文章详情页内所有卡片的悬停效果 */
+#post-container.card-base:hover,
+#post-container .card-base:hover {
+  transform: none !important;
+  border-color: inherit !important;
+  box-shadow: none !important;
+  transition: none !important;
 }
 
 @media (min-width: 768px) {
