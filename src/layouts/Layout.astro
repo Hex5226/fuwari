@@ -253,6 +253,67 @@ const bannerOffset =
   });
 })();
 </script>
+
+<!-- 返回主页指示器 + 滑动返回手势 -->
+<script>
+(function() {
+  // 只在文章详情页生效（URL 包含 /posts/）
+  if (!window.location.pathname.includes('/posts/')) return;
+
+  // ================= 1. 返回主页指示器 =================
+  const indicator = document.createElement('div');
+  indicator.textContent = '← 点击返回主页';
+  indicator.style.cssText = `
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    color: #c97e5a;
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.2);
+  `;
+  document.body.appendChild(indicator);
+
+  // 2秒后淡出，4秒后移除（可选）
+  setTimeout(() => { indicator.style.opacity = '0'; }, 2000);
+  setTimeout(() => { if (indicator.parentNode) indicator.remove(); }, 4000);
+
+  // 为指示器添加点击事件？由于指示器不可点击（pointer-events: none），只是为了提示。
+  // 真正返回主页仍靠左上角导航按钮。如果需要直接点击指示器返回，可改为可点击，但可能会误触，保持提示即可。
+
+  // ================= 2. 滑动返回手势 =================
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let isSwiping = false;
+
+  document.body.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    isSwiping = true;
+  });
+
+  document.body.addEventListener('touchend', (e) => {
+    if (!isSwiping) return;
+    touchEndX = e.changedTouches[0].screenX;
+    const deltaX = touchEndX - touchStartX;
+    // 左边缘起始（距离左边 < 30px）且向右滑动超过 50px
+    if (touchStartX < 30 && deltaX > 50) {
+      // 返回上一页（主页）
+      window.history.back();
+    }
+    isSwiping = false;
+  });
+})();
+</script>
+
 		<ConfigCarrier></ConfigCarrier>
 		<slot />
 
@@ -854,7 +915,7 @@ table-of-contents,
   background-color: rgba(0, 0, 0, 0.5) !important;
   backdrop-filter: blur(8px) !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 12px rgba(255, 200, 120, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* 按钮悬停时渐变背景（与主题色呼应） */
@@ -900,15 +961,17 @@ body {
   background-repeat: no-repeat;
 }
 }
-/* 手机端纯色背景（替换背景图） */
+/* 手机端纯色背景（覆盖整个页面） */
 @media (max-width: 767px) {
-  body {
+  html {
     background: #1a1a1a !important;
-    background-image: none !important;
   }
-  /* 移除可能存在的伪元素背景 */
-  body::before {
-    display: none !important;
+  body {
+    background: transparent !important;
+  }
+  /* 确保任何可能的白色背景元素被覆盖（可选） */
+  .card-base, .post-card, .widget-layout {
+    background-color: rgba(0, 0, 0, 0.5) !important; /* 保持毛玻璃半透明 */
   }
 }
 
