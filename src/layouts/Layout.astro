@@ -254,15 +254,15 @@ const bannerOffset =
 })();
 </script>
 
-<!-- 返回主页指示器 + 滑动返回手势 -->
+<!-- 返回主页指示器 + 滑动返回手势（带过渡） -->
 <script>
 (function() {
-  // 只在文章详情页生效（URL 包含 /posts/）
+  // 只在文章详情页生效
   if (!window.location.pathname.includes('/posts/')) return;
 
   // ================= 1. 返回主页指示器 =================
   const indicator = document.createElement('div');
-  indicator.textContent = '← 点击返回主页';
+  indicator.textContent = '← 从左向右滑动返回主页';
   indicator.style.cssText = `
     position: fixed;
     bottom: 80px;
@@ -283,17 +283,32 @@ const bannerOffset =
   `;
   document.body.appendChild(indicator);
 
-  // 2秒后淡出，4秒后移除（可选）
-  setTimeout(() => { indicator.style.opacity = '0'; }, 2000);
-  setTimeout(() => { if (indicator.parentNode) indicator.remove(); }, 4000);
+  // 3秒后淡出，5秒后移除
+  setTimeout(() => { indicator.style.opacity = '0'; }, 3000);
+  setTimeout(() => { if (indicator.parentNode) indicator.remove(); }, 5000);
 
-  // 为指示器添加点击事件？由于指示器不可点击（pointer-events: none），只是为了提示。
-  // 真正返回主页仍靠左上角导航按钮。如果需要直接点击指示器返回，可改为可点击，但可能会误触，保持提示即可。
-
-  // ================= 2. 滑动返回手势 =================
+  // ================= 2. 滑动返回手势（带过渡遮罩） =================
   let touchStartX = 0;
   let touchEndX = 0;
   let isSwiping = false;
+
+  // 创建遮罩层（用于过渡效果）
+  const overlay = document.createElement('div');
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    display: none;
+  `;
+  document.body.appendChild(overlay);
 
   document.body.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
@@ -306,8 +321,13 @@ const bannerOffset =
     const deltaX = touchEndX - touchStartX;
     // 左边缘起始（距离左边 < 30px）且向右滑动超过 50px
     if (touchStartX < 30 && deltaX > 50) {
-      // 返回上一页（主页）
-      window.history.back();
+      // 显示遮罩并淡入
+      overlay.style.display = 'block';
+      overlay.style.opacity = '1';
+      // 延迟执行返回，让遮罩过渡完成
+      setTimeout(() => {
+        window.history.back();
+      }, 200); // 200ms 后返回，给遮罩淡入时间
     }
     isSwiping = false;
   });
