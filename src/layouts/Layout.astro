@@ -254,7 +254,7 @@ const bannerOffset =
 })();
 </script>
 
-<!-- 可拖拽悬浮返回按钮（每次进入文章页都显示） -->
+<!-- 可拖拽悬浮返回按钮（提示显示5秒，流畅收缩） -->
 <script>
 (function() {
   if (!window.location.pathname.includes('/posts/')) return;
@@ -262,7 +262,7 @@ const bannerOffset =
   // 创建按钮
   const btn = document.createElement('div');
   btn.id = 'back-to-home-btn';
-  btn.innerHTML = '←';
+  btn.innerHTML = '← 点击返回主页';
   btn.style.cssText = `
     position: fixed;
     bottom: 80px;
@@ -270,19 +270,16 @@ const bannerOffset =
     background: rgba(0,0,0,0.7);
     backdrop-filter: blur(8px);
     color: #c97e5a;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 24px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
     z-index: 10000;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     border: 1px solid rgba(255,255,255,0.2);
     cursor: pointer;
-    transition: left 0.2s ease, width 0.2s ease, border-radius 0.2s ease;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     touch-action: none;
     user-select: none;
   `;
@@ -292,7 +289,6 @@ const bannerOffset =
   let isDragging = false;
   let hasMoved = false;
 
-  // 触摸开始
   btn.addEventListener('touchstart', (e) => {
     e.preventDefault();
     startX = e.touches[0].clientX;
@@ -305,7 +301,6 @@ const bannerOffset =
     btn.style.transition = 'none';
   });
 
-  // 触摸移动
   btn.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
     e.preventDefault();
@@ -317,17 +312,18 @@ const bannerOffset =
     newBottom = Math.max(0, Math.min(window.innerHeight - 60, newBottom));
     btn.style.left = newLeft + 'px';
     btn.style.bottom = newBottom + 'px';
-    btn.style.width = '40px';
-    btn.style.borderRadius = '50%';
-    btn.style.fontSize = '24px';
+    btn.style.width = '';
+    btn.style.borderRadius = '';
+    btn.style.fontSize = '';
+    btn.style.padding = '8px 16px';
+    btn.innerHTML = '← 点击返回主页';
     hasMoved = true;
   });
 
-  // 触摸结束
   btn.addEventListener('touchend', (e) => {
     if (!isDragging) return;
     isDragging = false;
-    btn.style.transition = 'left 0.2s ease, width 0.2s ease, border-radius 0.2s ease';
+    btn.style.transition = 'all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
     const rect = btn.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     if (centerX < 80) {
@@ -335,18 +331,21 @@ const bannerOffset =
       btn.style.width = '24px';
       btn.style.borderRadius = '0 40px 40px 0';
       btn.style.fontSize = '16px';
+      btn.style.padding = '0';
+      btn.innerHTML = '←';
     } else {
-      btn.style.width = '40px';
-      btn.style.borderRadius = '50%';
-      btn.style.fontSize = '24px';
+      btn.style.width = '';
+      btn.style.borderRadius = '';
+      btn.style.fontSize = '';
+      btn.style.padding = '8px 16px';
+      btn.innerHTML = '← 点击返回主页';
     }
-    // 如果没有移动，则视为点击，返回主页
     if (!hasMoved) {
       window.location.href = '/';
     }
   });
 
-  // 初始状态：3秒后检查是否靠近左边，自动吸附收缩
+  // 5秒后自动收缩（如果还在左下角默认位置附近）
   setTimeout(() => {
     const rect = btn.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -355,8 +354,10 @@ const bannerOffset =
       btn.style.width = '24px';
       btn.style.borderRadius = '0 40px 40px 0';
       btn.style.fontSize = '16px';
+      btn.style.padding = '0';
+      btn.innerHTML = '←';
     }
-  }, 3000);
+  }, 5000);
 })();
 </script>
 
