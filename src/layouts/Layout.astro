@@ -152,34 +152,6 @@ const bannerOffset =
 		  data-overlayscrollbars-initialize
 	>
 <script>
-(function() {
-  // 只在手机端（宽度 ≤ 767px）执行固定背景逻辑
-  if (window.innerWidth > 767) return;
-
-  const bgDiv = document.createElement('div');
-  bgDiv.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    pointer-events: none;
-  `;
-  document.body.appendChild(bgDiv);
-
-  // 确保 body 原有背景透明
-  document.body.style.background = 'transparent';
-  // 防止页面滚动时背景抖动（可选）
-  window.addEventListener('scroll', () => {
-    // 空函数，只是为了让浏览器重新计算？不需要
-  });
-})();
-
 
   // 平滑滚动：为所有内部锚点链接添加平滑滚动效果
   document.addEventListener('click', (e) => {
@@ -928,7 +900,17 @@ body {
   background-repeat: no-repeat;
 }
 }
-
+/* 手机端纯色背景（替换背景图） */
+@media (max-width: 767px) {
+  body {
+    background: #1a1a1a !important;
+    background-image: none !important;
+  }
+  /* 移除可能存在的伪元素背景 */
+  body::before {
+    display: none !important;
+  }
+}
 
 </style>
 
